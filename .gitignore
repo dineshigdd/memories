@@ -1,0 +1,12 @@
+# client side gitignores
+# dependencies
+client/node_modules
+
+# production
+/build
+
+
+
+
+# server side gitignores
+server/node_modules
