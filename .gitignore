@@ -1,9 +1,9 @@
 # client side gitignores
 # dependencies
-client/node_modules
+testclient/node_modules
 
 # production
-/build
+testclient/build
 
 
 
