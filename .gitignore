@@ -1,5 +1,7 @@
 # client side gitignores
 # dependencies
+/node_modules
+
 client/node_modules
 
 # production

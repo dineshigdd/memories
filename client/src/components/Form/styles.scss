@@ -1,22 +1,22 @@
-// .root{
-//     .MuiTextField-root: {
-//          margin: 1;
-//     }
-//   }
+.root { 
+      .MuiTextField-root {
+                  margin: 1.5px;    
+  }
+}
 
   .paper {
     padding: 2
   }
 
   .form{
-    display: 'flex';
-    flex-wrap: 'wrap';
-    justify-content: 'center';
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
   }
 
   .fileInput {
-    width: '97%';
-    margin: '10px 0';
+    width: 97%;
+    margin: 10px 0;
   }
 
  .buttonSubmit {

@@ -6,11 +6,11 @@ import postRouter from './routes/post.js';
 
 const app = express();
 
-app.use('/posts', postRouter);
 
 app.use( bodyParser.json({ limit: '30mb', extended: true }));
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
-app.use( cors());
+app.use( cors()); //cors need to be before app.use('/posts', postRouter);
+app.use('/posts', postRouter);
 
 const CONNECTION_URL = 'mongodb+srv://dineshigdd:pmkbandara@cluster0.sogsk.mongodb.net/?retryWrites=true&w=majority';
 const PORT = process.env.PORT || 5000;
