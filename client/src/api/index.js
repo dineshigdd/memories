@@ -1,11 +1,14 @@
 import axios from 'axios';
 
-const url = 'http://localhost:5000/posts';
+const url = '/posts';
 
 export const fetchPosts = () => axios.get( url );
 export const createPost = ( newPost ) => {
-    console.log( newPost )
-    axios.post( url, newPost )
+    // console.log( newPost )
+    return axios.post( url, newPost );
+    // .then( res => console.log( res.data ))
 }
 
-export const updatePost = ( id, updatedPost ) => axios.patch( `${ url }/${ id }`, updatedPost );
+export const updatePost = ( id, updatedPost ) => {   
+    return axios.patch( `${ url }/${ id }`, updatedPost );
+}

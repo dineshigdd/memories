@@ -11,26 +11,36 @@ export const getPosts = async ( req,res ) => {
 }
 
 export const createPost = async ( req, res ) => {
-    const post = req.body;
+  
 
-    const newPost = new PostMessage( post );
-    console.log( newPost )
+    const post = new PostMessage(  req.body );
+    
     try{
-        await newPost.save();
+        const newPost = await post.save();
+        res.json( newPost );
+  
 
-        res.status( 201 ).json( newPost );
     }catch( error ){
         res.status( 409 ).json( { message: error.message } );
     }
 }
 
 export const updatePost = async ( req, res ) => {
-    const {id : _id } = req.params;
+    const { id : _id } = req.params;
+    const post = req.body;
 
     if( !mongoose.Types.ObjectId.isValid( _id )) return res.status( 404 ).send( 'No post with that id');
     
     
     const updatedPost = await PostMessage.findByIdAndUpdate( _id, post , { new: true });
-
-    res.json( updatePost );
+    console.log( updatedPost );
+    res.json( updatedPost );
+    //   PostMessage.findByIdAndUpdate( _id, post ,{ new: true }, ( error, updatedPost ) =>{
+    //     if( error ){
+    //         console.log( error );
+    //     }else{
+    //         console.log( updatedPost)
+    //         res.json( updatedPost );
+    //     }
+    // });
 }
