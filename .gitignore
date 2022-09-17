@@ -12,3 +12,5 @@ client/build
 
 # server side gitignores
 server/node_modules
+
+api

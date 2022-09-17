@@ -3,7 +3,8 @@ import './styles.scss';
 import { TextField, Button, Typography, Paper } from '@mui/material';
 import FileBase from 'react-file-base64';
 import { useDispatch, useSelector } from 'react-redux';
-import { createPost , updatePost } from '../../actions/posts';
+import { createPost , updatePost , deletePost } from '../../actions/posts';
+
 
 
 const Form = ({ currentId, setCurrentId }) => {
@@ -26,10 +27,10 @@ const Form = ({ currentId, setCurrentId }) => {
     e.preventDefault();   
 
     if( currentId ){   
-      console.log( postData)    
+      
         dispatch( updatePost( currentId, postData ));
         clear();
-    }else{
+      }else{
       
         dispatch( createPost( postData ));
         clear();
