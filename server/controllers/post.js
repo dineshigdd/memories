@@ -26,9 +26,10 @@ export const createPost = async ( req, res ) => {
 }
 
 export const updatePost = async ( req, res ) => {
+    console.log( " Updating");
     const { id  } = req.params;
     const post = req.body;
-
+    console.log( post)
     if( !mongoose.Types.ObjectId.isValid( id )) return res.status( 404 ).send( 'No post with that id');
     
     
@@ -48,10 +49,23 @@ export const updatePost = async ( req, res ) => {
 export const deletePost = async( req, res ) => {
     console.log( req.params)
     const { id } = req.params;
+  
     
 
     if( !mongoose.Types.ObjectId.isValid( id )) return res.status( 404 ).send( 'No post with that id');
 
-    const deletePost = await PostMessage.findByIdAndDelete( id, { new: true } )
+    const deletePost = await PostMessage.findByIdAndDelete( id )
     res.json( deletePost );
+}
+
+export const updateLikeCount = async( req, res ) => {
+    
+    const { id } = req.params;
+    let { likeCount } = req.body;
+    console.log( req.body );
+    
+    if( !mongoose.Types.ObjectId.isValid( id )) return res.status( 404 ).send( 'No post with that id');
+    
+    likeCount = await PostMessage.findByIdAndUpdate( id, likeCount , { new: true });
+    res.json( likeCount );
 }

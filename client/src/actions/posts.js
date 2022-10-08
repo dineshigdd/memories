@@ -1,4 +1,3 @@
-import axios from 'axios';
 import * as api from '../api';
 
 //Action creators
@@ -25,7 +24,7 @@ export const createPost = ( newPost ) => async( dispatch ) => {
 export const updatePost = ( id, post ) => async( dispatch ) => {
     try{
         const { data } =  await api.updatePost( id, post );
-        console.log( data );
+        console.log( data.likeCount );
         dispatch( { type : "UPDATE", payload: data });
 
     }catch(error){
@@ -39,6 +38,17 @@ export const deletePost = ( id ) => async( dispatch ) => {
         await api.deletePost( id );
         
         dispatch( { type: "DELETE", payload: id })
+    }catch( error ){
+        console.log( error );
+    }
+}
+
+export const updateLikeCount = ( id , likeCount ) => async( dispatch ) => {
+    try{
+        console.log( likeCount);
+       const { data } = await api.updateLikeCount( id, likeCount );
+       
+    //    dispatch( { type: "UPDATE_LIKE_COUNT", payload:data })     
     }catch( error ){
         console.log( error );
     }

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect , useState } from 'react'
 import './styles.scss';
 import { Card, CardContent, CardActions , CardMedia , Button, Typography } from '@mui/material';
 import ThumbUpAltIcon from '@mui/icons-material/ThumbUpAlt';
@@ -6,11 +6,22 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import moment from 'moment';
 import { useDispatch } from 'react-redux';
-import { deletePost } from '../../../actions/posts';
+import { deletePost, updateLikeCount , updatePost } from '../../../actions/posts';
+
+
+
 
 const Post = ({ post, setCurrentId }) => {
   
   const dispatch = useDispatch();
+  const [ likeCount, setLikeCount] = useState(post.likeCount);
+
+  
+  useEffect(()=>{
+    
+    dispatch( updateLikeCount( post._id, likeCount ));
+
+  },[likeCount]);
 
   return (
     <Card className="card">
@@ -29,7 +40,7 @@ const Post = ({ post, setCurrentId }) => {
          <Typography className="title" variant="body2" gutterBottom>{ post.tags.map( tag => `#${ tag } `)}</Typography>
       </CardContent>
       <CardActions>
-          <Button size="small" color="primary" onClick={() => {}}>
+          <Button size="small" color="primary" onClick={ () => setLikeCount( likeCount  + 1)}>
               <ThumbUpAltIcon fontSize="small" />Like { post.likeCount }
           </Button>
           <Button size="small" color="primary" onClick={ () => { dispatch( deletePost( post._id ) )}}>
