@@ -1,28 +1,20 @@
-import React, { useEffect , useState } from 'react'
+import React from 'react'
 import './styles.scss';
 import { Card, CardContent, CardActions , CardMedia , Button, Typography } from '@mui/material';
 import ThumbUpAltIcon from '@mui/icons-material/ThumbUpAlt';
 import DeleteIcon from '@mui/icons-material/Delete';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import moment from 'moment';
-import { useDispatch } from 'react-redux';
-import { deletePost, updateLikeCount , updatePost } from '../../../actions/posts';
+import { useDispatch  } from 'react-redux';
+import { deletePost, updateLikeCount } from '../../../actions/posts';
 
 
 
 
 const Post = ({ post, setCurrentId }) => {
   
-  const dispatch = useDispatch();
-  const [ likeCount, setLikeCount] = useState(post.likeCount);
-
-  
-  useEffect(()=>{
-    
-    dispatch( updateLikeCount( post._id, likeCount ));
-
-  },[likeCount]);
-
+  const dispatch = useDispatch();  
+ 
   return (
     <Card className="card">
       <CardMedia className="media" image={ post.selectedFile } title={ post.title }/>
@@ -36,15 +28,16 @@ const Post = ({ post, setCurrentId }) => {
       <div className="details">
          <Typography variant="body2" color="textSecondary">{ post.tags.map( tag => `#${ tag } `)}</Typography>
       </div>  
+      <Typography className="title" gutterBottom variant="h5" component="h2">{post.title}</Typography>
       <CardContent>
-         <Typography className="title" variant="body2" gutterBottom>{ post.tags.map( tag => `#${ tag } `)}</Typography>
+        <Typography variant="body2" color="textSecondary" component="p">{post.message}</Typography>
       </CardContent>
       <CardActions>
-          <Button size="small" color="primary" onClick={ () => setLikeCount( likeCount  + 1)}>
+          <Button size="small" color="primary" onClick={ () => dispatch( updateLikeCount( post._id ))}>
               <ThumbUpAltIcon fontSize="small" />Like { post.likeCount }
           </Button>
-          <Button size="small" color="primary" onClick={ () => { dispatch( deletePost( post._id ) )}}>
-              <DeleteIcon fontSize="small" />Delete { post.likeCount }
+          <Button size="small" color="primary" onClick={ () => dispatch( deletePost( post._id ) )}>
+              <DeleteIcon fontSize="small" />Delete
           </Button>
       </CardActions>
     </Card>

@@ -43,12 +43,13 @@ export const deletePost = ( id ) => async( dispatch ) => {
     }
 }
 
-export const updateLikeCount = ( id , likeCount ) => async( dispatch ) => {
+export const updateLikeCount = ( id ) => async( dispatch ) => {
     try{
-        console.log( likeCount);
-       const { data } = await api.updateLikeCount( id, likeCount );
        
-    //    dispatch( { type: "UPDATE_LIKE_COUNT", payload:data })     
+       const { data } = await api.updateLikeCount( id );
+       console.log( "return value")
+        console.log( data )
+       dispatch( { type: "UPDATE_LIKE_COUNT", payload:data })     
     }catch( error ){
         console.log( error );
     }

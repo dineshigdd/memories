@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const url = '/posts';
+const url = 'http://localhost:5000/posts';
 
 export const fetchPosts = () => axios.get( url );
 export const createPost = ( newPost ) => {
@@ -17,8 +17,8 @@ export const deletePost = ( id ) => {
     return axios.delete( `${ url }/${ id }`);
 }
 
-export const updateLikeCount = ( id , updateLikeCount ) => {
+export const updateLikeCount = ( id) => {
     console.log("testing axios")
-    console.log( updateLikeCount)
-    return axios.patch( `${ url }/likecount/${ id }`, updateLikeCount );
+    // console.log( updateLikeCount)
+    return axios.patch( `${ url }/${ id }/likecount`);
 }
